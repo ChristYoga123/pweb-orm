@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken();
-            $table->enum("role", ["Admin", "Customer"])->default("Customer");
+            $table->foreignId("user_id")->constrained();
+            $table->foreignId("venue_id")->constrained();
+            $table->string("midtrans_url");
+            $table->string("midtrans_booking_code");
+            $table->string("payment_status")->default("waiting");
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('transactions');
     }
 };
