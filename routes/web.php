@@ -23,8 +23,6 @@ Route::get('/', [HomeController::class, "index"]);
 Route::middleware("auth")->group(function () {
     Route::get("/show/{venue}", [HomeController::class, "show"])->name("venue.show");
     Route::get("/show/{id}/api", [HomeController::class, "show_api"]);
-    Route::get("/payment", [TransactionController::class, "midtransCallback"]); # respons view snap
-    Route::post("/payment", [TransactionController::class, "midtransCallback"]); # request via api
     Route::post("/transaction/{venue}", [TransactionController::class, "store"])->name("transaction.store");
 });
 Route::get("/payment/success", [TransactionController::class, "midtransCallback"]);
