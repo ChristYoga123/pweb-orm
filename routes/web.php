@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\VenueController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\HomeController;
@@ -47,5 +48,7 @@ Route::prefix("admin")->name("admin.")->middleware('auth_admin')->group(function
     Route::get("/", [DashboardController::class, "index"])->name("dashboard.index");
     // Venue
     Route::resource("venue", VenueController::class);
+    // Transaction
+    Route::get("transaction", [AdminTransactionController::class, "index"])->name("transaction.index");
 });
 /* ADMIN */

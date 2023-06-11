@@ -18,7 +18,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="side-menu">
+            <a href="{{ route("admin.transaction.index") }}" class="side-menu {{ Route::is("admin.transaction.*") ? "side-menu--active" : "" }}">
                 <div class="side-menu__icon"> <i data-feather="shopping-cart"></i> </div>
                 <div class="side-menu__title"> Data Transaksi </div>
             </a>
