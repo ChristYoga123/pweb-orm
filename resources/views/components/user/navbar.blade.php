@@ -15,10 +15,15 @@
                 <details class="dropdown">
                     <summary class="m-1 btn">Halo, {{ Auth::user()->name }}</summary>
                     <ul class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                        @if (Auth::user()->role == "Admin")
+                        <li>
+                            <a href="{{ route("admin.dashboard.index") }}">Dashboard Admin</a>
+                        </li>
+                        @endif
                         <li>
                             <form action="{{ route("logout") }}" method="POST">
                                 @csrf
-                                <button class="btn w-full" type="submit">Logout</button>
+                                <button class="btn" type="submit">Logout</button>
                             </form>
                         </li>
                     </ul>

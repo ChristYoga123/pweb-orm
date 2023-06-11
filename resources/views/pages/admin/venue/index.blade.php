@@ -43,12 +43,12 @@
                     </td>
                     <td class="border-b w-5">
                         <div class="flex sm:justify-center items-center">
-                            <a href="#" class="flex items-center mr-3 text-gray-700"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Detail </a>
+                            <a href="{{ route("venue.show", $venue->slug) }}" class="flex items-center mr-3 text-gray-700"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Detail </a>
                             <a href="{{ route("admin.venue.edit", $venue->slug) }}" class="flex items-center mr-3 text-yellow-500"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Edit </a>
                             <form action="{{ route("admin.venue.destroy", $venue->slug) }}" method="POST" class="flex items-center mr-3 text-red-500">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="flex">
+                                <button type="button" id="btn-hapus" class="flex">
                                     <i data-feather="trash" class="w-4 h-4 mr-1"></i>
                                     <p>Hapus</p>
                                 </button>
@@ -99,7 +99,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 
     <script>
-        $("form button").on("click", function()
+        $("form button#btn-hapus").on("click", function()
         {
             Swal.fire({
                 title: 'Apakah anda yakin ingin menghapus data ini',
