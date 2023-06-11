@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\VenueController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +33,6 @@ Route::prefix("admin")->name("admin.")->middleware('auth_admin')->group(function
     Route::post("logout", [AuthController::class, "logout"])->name("logout");
     // Dashboard
     Route::get("/", [DashboardController::class, "index"])->name("dashboard.index");
+    // Venue
+    Route::resource("venue", VenueController::class);
 });

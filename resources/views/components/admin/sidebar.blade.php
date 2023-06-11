@@ -6,13 +6,13 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="#" class="side-menu">
+            <a href="{{ route("admin.dashboard.index") }}" class="side-menu {{ Route::is("admin.dashboard.index") ? "side-menu--active" : "" }}">
                 <div class="side-menu__icon"> <i data-feather="home"></i> </div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
         </li>
         <li>
-            <a href="#" class="side-menu">
+            <a href="{{ route("admin.venue.index") }}" class="side-menu {{ Route::is("admin.venue.*") ? "side-menu--active" : "" }}">
                 <div class="side-menu__icon"> <i data-feather="map"></i> </div>
                 <div class="side-menu__title"> Data Venue </div>
             </a>

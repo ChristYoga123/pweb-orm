@@ -6,7 +6,7 @@
         Data Venue
     </h2>
     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-        <a href="#" class="button text-white bg-theme-1 shadow-md mr-2">+ Tambah Data Venue</a>
+        <a href="{{ route("admin.venue.create") }}" class="button text-white bg-theme-1 shadow-md mr-2">+ Tambah Data Venue</a>
     </div>
 </div>
 <!-- BEGIN: Datatable -->
@@ -22,33 +22,33 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($venues as $venue) --}}
+            @foreach ($venues as $venue)
                 <tr>
                     <td class="border-b">
-                        <div class="font-medium whitespace-no-wrap">Bandung Permai</div>
-                        <div class="text-gray-600 text-xs whitespace-no-wrap">Hotel</div>
+                        <div class="font-medium whitespace-no-wrap">{{ $venue->name }}</div>
+                        <div class="text-gray-600 text-xs whitespace-no-wrap">{{ $venue->category }}</div>
                     </td>
                     <td class="text-center border-b">
                         <div class="flex sm:justify-center">
                             <div class="intro-x w-10 h-10 image-fit"></div>
                             <div class="intro-x w-10 h-10 image-fit -ml-5">
-                                <img alt="bandung-permai" class="rounded-full" src="/storage/">
+                                <img alt="bandung-permai" class="rounded-full" src="/storage/{{ $venue->hero_image }}">
                             </div>
                             <div class="intro-x w-10 h-10 image-fit -ml-5"></div>
                         </div>
                     </td>
-                    <td class="text-center border-b">Rp20.000,00</td>
+                    <td class="text-center border-b">Rp{{ $venue->price_per_night }},00</td>
                     <td class="w-40 border-b">
-                        <div class="flex items-center sm:justify-center">Jember, Indonesia</div>
+                        <div class="flex items-center sm:justify-center">{{ $venue->location }}, Indonesia</div>
                     </td>
                     <td class="border-b w-5">
                         <div class="flex sm:justify-center items-center">
                             <a href="#" class="flex items-center mr-3 text-gray-700"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Detail </a>
-                            <a href="#" class="flex items-center mr-3 text-yellow-500"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <form action="#" method="POST" class="flex items-center mr-3 text-red-500">
+                            <a href="{{ route("admin.venue.edit", $venue->slug) }}" class="flex items-center mr-3 text-yellow-500"> <i data-feather="edit" class="w-4 h-4 mr-1"></i> Edit </a>
+                            <form action="{{ route("admin.venue.destroy", $venue->slug) }}" method="POST" class="flex items-center mr-3 text-red-500">
                                 @csrf
                                 @method('DELETE')
-                                <button class="flex">
+                                <button type="button" class="flex">
                                     <i data-feather="trash" class="w-4 h-4 mr-1"></i>
                                     <p>Hapus</p>
                                 </button>
@@ -56,7 +56,7 @@
                         </div>
                     </td>
                 </tr>          
-            {{-- @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 </div>
@@ -112,7 +112,7 @@
                 if (result.isConfirmed) {
                     $('form').submit()
                 } else if (result.isDenied) {
-                    Swal.fire('Changes are not saved', '', 'info')
+                    Swal.fire('Batal', 'Proses menghapus data batal', 'info')
                 }
             })
         })

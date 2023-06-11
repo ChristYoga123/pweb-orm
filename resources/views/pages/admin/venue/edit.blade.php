@@ -8,40 +8,46 @@
     <div class="intro-y col-span-12 lg:col-span-6">
         <!-- BEGIN: Form Layout -->
         <div class="intro-y box p-5">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route("admin.venue.update", $venue->slug) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div>
                     <label>Nama Venue</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Masukkan nama venue" name="name">
+                    <input type="text" class="input w-full border mt-2" placeholder="Masukkan nama venue" name="name" value="{{ $venue->name }}">
                 </div>
                 <div class="mt-5">
                     <label>Kategori Venue</label>
                     <select name="category" class="select2 w-full mt-2">
-                        <option value="House">House</option>
-                        <option value="Hotel">Hotel</option>
-                        <option value="Apartment">Apartment</option>
+                        <option value="House" {{ $venue->category == "House" ? "selected" : "" }}>House</option>
+                        <option value="Hotel" {{ $venue->category == "Hotel" ? "selected" : "" }}>Hotel</option>
+                        <option value="Apartment" {{ $venue->category == "Apartment" ? "selected" : "" }}>Apartment</option>
                     </select>
                 </div>
                 <div class="mt-5">
                     <label>Lokasi Venue</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Masukkan lokasi venue" name="location">
+                    <input type="text" class="input w-full border mt-2" placeholder="Masukkan lokasi venue" name="location" value="{{ $venue->location }}">
                 </div>
                 <div class="mt-5">
                     <label>Harga Venue Per Malam</label>
-                    <input type="number" class="input w-full border mt-2" placeholder="Masukkan harga venue" name="price_per_night">
+                    <input type="number" class="input w-full border mt-2" placeholder="Masukkan harga venue" name="price_per_night" value="{{ $venue->price_per_night }}">
                 </div>
                 <div class="mt-5">
                     <label>Gambar Utama Venue</label>
-                    <img class="image-preview" alt="" width="300px">
+                    @if ($venue->hero_image)
+                        <img src="/storage/{{ $venue->hero_image }}" class="image-preview" alt="" width="300px">
+                    @else
+                        <img class="image-preview" alt="" width="300px">
+                    @endif
+                    <input type="hidden" name="old_image" value="{{ $venue->hero_image }}">
                     <input type="file" class="image-input input w-full border mt-2" name="hero_image" onchange="previewImage()">
                 </div>
                 <div class="mt-5">
-                    <label>Galeri Venue (Pilih beberapa file sekaligus dengan format PNG)</label>
+                    <label>Galeri Venue (Pilih beberapa file sekaligus dengan format PNG. Boleh diisi kosong apabila tidak ingin mengubah galeri yang telah tersimpan)</label>
                     <input type="file" class="image-input input w-full border mt-2" name="gallery_venue[]" multiple>
                 </div>
                 <div class="mt-5">
                     <label>Deskripsi Venue</label>
-                    <textarea data-feature="basic" class="summernote mt-2" name="description"></textarea>
+                    <textarea data-feature="basic" class="summernote mt-2" name="description">{{ $venue->description }}</textarea>
                 </div>
                 <div class="text-right mt-5">
                     <button type="button" class="button w-24 border text-gray-700 mr-1">Cancel</button>

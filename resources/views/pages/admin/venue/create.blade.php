@@ -8,7 +8,7 @@
     <div class="intro-y col-span-12 lg:col-span-6">
         <!-- BEGIN: Form Layout -->
         <div class="intro-y box p-5">
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route("admin.venue.store") }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <label>Nama Venue</label>
@@ -33,11 +33,11 @@
                 <div class="mt-5">
                     <label>Gambar Utama Venue</label>
                     <img class="image-preview" alt="" width="300px">
-                    <input type="file" class="image-input input w-full border mt-2" name="hero_image" onchange="previewImage()">
+                    <input type="file" class="image-input input w-full border mt-2" accept="image/*" name="hero_image" onchange="previewImage()">
                 </div>
                 <div class="mt-5">
                     <label>Galeri Venue (Pilih beberapa file sekaligus dengan format PNG)</label>
-                    <input type="file" class="image-input input w-full border mt-2" name="gallery_venue[]" multiple>
+                    <input type="file" class="image-input input w-full border mt-2" name="gallery_venue[]" accept="image/*" multiple>
                 </div>
                 <div class="mt-5">
                     <label>Deskripsi Venue</label>
