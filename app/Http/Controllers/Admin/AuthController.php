@@ -20,7 +20,7 @@ class AuthController extends Controller
             "password" => "required"
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], true)) {
             if (Auth::check() && Auth::user()->role == "Admin") {
                 $request->session()->regenerate();
                 return redirect()->route("admin.dashboard.index");
